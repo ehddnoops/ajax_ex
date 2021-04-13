@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<title>로그인 페이지</title>
+</head>
+<body>
+    <h1>로그인 페이지</h1>
+    <div>
+        아이디: <input type="text" id="userid"><br>
+        비밀번호: <input type="text" id="password"><br>
+        <button id="login">로그인</button>
+    </div>
+    
+    <script type="text/javascript">
+    $(document).ready(function () {
+		$('#login').click(function () {
+			var userid = $('#userid').val(); // input의 value값을 저장
+			var password = $('#password').val(); // input의 value값을 저장
+			var obj = {
+					userid : userid, 
+					password : password
+			};
+			
+			//ajax 요청 전송
+			$.ajax({
+				type : 'post',
+				url : '../login.do',
+				data : obj,
+				success : function(result){
+					console.log(result);
+					if(result == 'success'){
+						alert('로그인성공');
+					} else{
+						alert('로그인실패');
+					}
+				}
+			});
+			
+		});
+	});
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<title>jQuery AJAX JSON</title>
+</head>
+<body>
+    <p id="output"></p>
+    
+    <script type="text/javascript">
+    $(document).ready(function(){
+    	$.ajax({
+    		type : "get",
+    		url : "06_json_test.txt",
+    		success : function(result) {
+    			var output = $("#output");
+    			console.log(typeof(result)); //result : JSON(String)
+    			var obj = JSON.parse(result); // 문자열을 자바스크립트 객체로 변환
+    			console.log(obj);
+    			var str = "";
+    			str += "이름 : " + obj.name + "<br>";
+    			str += "나이 : " + obj.age + "<br>";
+    			for( var x in obj.pets) {
+    				str += "펫 : " + obj.pets[x].animal +
+    				", 이름 : " + obj.pets[x].name + "<br>";
+    			}
+    			output.html(str); // 완성된 문자열을 p태그에 전송
+    		}
+    	});
+    });
+    </script>
+
+</body>
+</html>
